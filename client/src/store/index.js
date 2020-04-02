@@ -10,7 +10,35 @@ const store = new Vuex.Store({
             title: 'Song lyrics',
             count: 42,
             emoji: '🎷',
-            cards: null,
+            cards: [{
+                id: 1,
+                word: 'comer',
+                translation: 'to eat',
+            },{
+                id: 2,
+                word: 'beber',
+                translation: 'to drink',
+            },{
+                id: 3,
+                word: 'bailar',
+                translation: 'to dance',
+            },{
+                id: 4,
+                word: 'cantar',
+                translation: 'to sing',
+            },{
+                id: 5,
+                word: 'tocar',
+                translation: 'to play',
+            },{
+                id: 6,
+                word: 'hacer',
+                translation: 'to make',
+            },{
+                id: 7,
+                word: 'estar',
+                translation: 'to be',
+            }],
         },{
             id: 2,
             title: 'Sailing',
@@ -30,6 +58,11 @@ const store = new Vuex.Store({
         userName: 'Lukasz',
     },
     mutations: {
+    },
+    getters: {
+        getListById: state => id => {
+            return state.lists.find(list => list.id === id)
+        }
     }
 })
 

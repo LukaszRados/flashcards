@@ -1,0 +1,15 @@
+.list {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+.list__inner {
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    position: absolute;
+    transform: translateX(100%);
+    transition: transform .5s ease;
+}
+

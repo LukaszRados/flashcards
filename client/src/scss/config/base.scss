@@ -10,6 +10,7 @@ body {
 
 body {
     background: linear-gradient(to right bottom, $color-primary 0%, $color-primary-dark 100%);
+    background-attachment: fixed;
     background-size: cover;
     min-height: 100vh;
 }

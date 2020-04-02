@@ -1,0 +1,48 @@
+@import './../../config/variables.scss';
+
+.card {
+    align-items: center;
+    display: flex;
+    flex: 560px 0 0;
+    height: 100vh;
+    opacity: 1;
+    padding: 20px;
+    transition: opacity .5s ease;
+    width: 560px;
+}
+.card.is-hidden {
+    opacity: .15;
+}
+.card.is-hidden .card__word {
+    font-size: 0;
+}
+.card.is-hidden .card__word:after {
+    background: rgba($color-primary-dark, .25);
+    border-radius: 30px;
+    content: '';
+    display: block;
+    height: 20px;
+    width: 100px;
+}
+.card__inner {
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 300px;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+}
+.card__word {
+    color: $color-primary-dark;
+    display: block;
+    font-family: $font-serif;
+    font-size: 2.2em;
+    font-style: italic;
+}
+.card__word.is-hidden {
+    display: none;
+}
