@@ -18,7 +18,8 @@ export default {
     },
     computed: {
         counter () {
-            return `${this.item.count} ${this.item.count === 1 ? 'card' : 'cards'}` 
+            if (!this.item.cards || this.item.cards.length === 0) return `no cards`
+            return `${this.item.cards.length} ${this.item.cards.length === 1 ? 'card' : 'cards'}` 
         },
         link () {
             return this.item.type === 'create' ? '#create' : '#'
