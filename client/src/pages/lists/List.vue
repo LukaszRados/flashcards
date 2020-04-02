@@ -1,6 +1,6 @@
 <template>
     <div class='list'>
-        <div class='list__inner' :style='{ transform: translate }' @click='next()'>
+        <div class='list__inner' :style='{ transform: translate }'>
             <Card
                 v-for='card in list.cards'
                 :key='card.id'
@@ -10,11 +10,22 @@
                 :ref='card.id'
             />
         </div>
+        <ListButton
+            type='next'
+            @click=next
+            v-if='index < list.cards.length - 1'
+        />
+        <ListButton
+            type='prev'
+            @click='previous'
+            v-if='index !== 0' 
+        />
     </div>
 </template>
 
 <script>
 import Card from './../../components/lists/Card'
+import ListButton from './../../components/lists/ListButton'
 
 export default {
     data () {
@@ -26,6 +37,7 @@ export default {
     },
     components: {
         Card,
+        ListButton,
     },
     computed: {
         translate () {
@@ -39,7 +51,13 @@ export default {
     },
     methods: {
         next () {
-            this.index = this.index === this.list.cards.length - 1 ? 0 : this.index + 1
+            console.log('next')
+            this.index++
+            this.activeCard = this.list.cards[this.index]
+        },
+        previous () {
+            console.log('prev')
+            this.index--
             this.activeCard = this.list.cards[this.index]
         }
     },

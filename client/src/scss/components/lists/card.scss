@@ -7,11 +7,12 @@
     height: 100vh;
     opacity: 1;
     padding: 20px;
-    transition: opacity .5s ease;
+    transition: opacity .5s ease, transform .5s ease;
     width: 560px;
 }
 .card.is-hidden {
     opacity: .15;
+    transform: scale(.95);
 }
 .card.is-hidden .card__word {
     font-size: 0;
@@ -25,16 +26,18 @@
     width: 100px;
 }
 .card__inner {
+    max-width: 560px;
+    width: 100%;
+}
+.card__side {
     align-items: center;
     background: #fff;
     border-radius: 20px;
     display: flex;
     justify-content: center;
     min-height: 300px;
-    max-width: 560px;
     margin: 0 auto;
     padding: 20px;
-    width: 100%;
 }
 .card__word {
     color: $color-primary-dark;
@@ -42,7 +45,4 @@
     font-family: $font-serif;
     font-size: 2.2em;
     font-style: italic;
-}
-.card__word.is-hidden {
-    display: none;
 }
