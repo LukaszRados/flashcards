@@ -2,10 +2,11 @@
     <div class='card' :class='{ "is-hidden": !active, "is-turned": !revealed }'>
         <div class='card__inner' @click='toggle'>
             <transition name='flip-card'>
-                <div class='card__side card__side--front' v-if='activeSide === "front"'>
+                <div class='card__side card__side--front' v-if='activeSide === "front"' key='front'>
                     <span class='card__word'>{{ front }}</span>
                 </div>
-                <div class='card__side card__side--back' v-else>
+                <div class='card__side card__side--back' v-else key='back'>
+                    <span class='card__original'>{{ front }}</span>
                     <span class='card__word'>{{ back }}</span>
                 </div>
             </transition>
@@ -40,6 +41,7 @@ export default {
     },
     methods: {
         toggle () {
+            if (!this.active) return
             this.activeSide = this.activeSide === 'front' ? 'back' : 'front' 
         }
     }

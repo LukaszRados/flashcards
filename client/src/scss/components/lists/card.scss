@@ -7,6 +7,7 @@
     height: 100vh;
     opacity: 1;
     padding: 20px;
+    perspective: 1200px;
     transition: opacity .5s ease, transform .5s ease;
     width: 560px;
 }
@@ -15,6 +16,9 @@
     transform: scale(.95);
 }
 .card.is-hidden .card__word {
+    font-size: 0;
+}
+.card.is-hidden .card__original {
     font-size: 0;
 }
 .card.is-hidden .card__word:after {
@@ -27,17 +31,26 @@
 }
 .card__inner {
     max-width: 560px;
+    position: relative;
     width: 100%;
 }
 .card__side {
     align-items: center;
     background: #fff;
+    backface-visibility: hidden;
     border-radius: 20px;
     display: flex;
+    flex-direction: column;
+    height: 300px;
     justify-content: center;
-    min-height: 300px;
     margin: 0 auto;
     padding: 20px;
+    transform-style: preserve-3d;
+}
+.card__side--back {
+    position: absolute;
+    top: calc(50% - 150px);
+    width: 100%;
 }
 .card__word {
     color: $color-primary-dark;
@@ -45,4 +58,24 @@
     font-family: $font-serif;
     font-size: 2.2em;
     font-style: italic;
+}
+.card__original {
+    color: $color-primary;
+    display: block;
+    font-family: $font-serif;
+    font-size: 1em;
+    font-style: italic;
+}
+
+.flip-card-enter-active {
+    transition: transform .3s linear;
+}
+.flip-card-leave-active {
+    transition: transform .3s linear;
+}
+.flip-card-enter {
+    transform: rotateY(180deg);
+}
+.flip-card-leave-to {
+    transform: rotateY(-180deg);
 }
