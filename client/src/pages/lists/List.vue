@@ -13,7 +13,7 @@
         <div class='list'>
             <div class='list__inner' :style='{ transform: translate }'>
                 <Card
-                    v-for='card in list.cards'
+                    v-for='card in cards'
                     :key='card.id'
                     :front='card.word'
                     :back='card.translation'
@@ -24,7 +24,7 @@
             <ListButton
                 type='next'
                 @click='next'
-                v-if='index < list.cards.length - 1'
+                v-if='index < cards.length - 1'
             />
             <ListButton
                 type='prev'
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Card from './../../components/lists/Card'
 import ListButton from './../../components/lists/ListButton'
 import Progress from './../../components/lists/Progress'
@@ -44,9 +45,10 @@ import Progress from './../../components/lists/Progress'
 export default {
     data () {
         return {
-            list: this.$store.getters.getListById(parseInt(this.$route.params.id)),
+            cards: [],
             index: 0,
             activeCard: {},
+            translate: '',
         }
     },
     components: {
@@ -55,30 +57,47 @@ export default {
         Progress,
     },
     computed: {
-        translate () {
-            if (!this.activeCard || !this.$refs[this.activeCard.id]) return ''
-
-            const screenWidth = document.body.clientWidth
-            const cardWidth = this.$refs[this.activeCard.id][0].$el.clientWidth
-
-            return `translateX(${screenWidth / 2 - cardWidth / 2 - cardWidth * this.index}px)`
-        },
         progress () {
-            return Math.round((this.index) / (this.list.cards.length - 1) * 100)
+            return Math.round((this.index) / (this.cards.length - 1) * 100)
+        }
+    },
+    watch: {
+        activeCard () {
+            this.updatePosition()
         }
     },
     methods: {
+        ...mapActions([
+            'fetchCards',
+            'fetchLists',
+        ]),
         next () {
             this.index++
-            this.activeCard = this.list.cards[this.index]
+            this.activeCard = this.cards[this.index]
         },
         previous () {
             this.index--
-            this.activeCard = this.list.cards[this.index]
+            this.activeCard = this.cards[this.index]
+        },
+        updatePosition () {
+            if (!this.activeCard || !this.$refs[this.activeCard.id]) return ''
+            const screenWidth = document.body.clientWidth
+            const cardWidth = this.$refs[this.activeCard.id][0].$el.clientWidth
+
+            this.translate = `translateX(${screenWidth / 2 - cardWidth / 2 - cardWidth * this.index}px)`
         }
     },
     mounted () {
-        this.activeCard = this.list.cards[this.index]
+        const listId = parseInt(this.$route.params.id, 10)
+        this.fetchLists().then(() => {
+            this.fetchCards(listId).then(() => {
+                this.cards = this.$store.getters.getCards(listId)
+                this.activeCard = this.cards[this.index]
+                this.$nextTick(() => {
+                    this.updatePosition()
+                })
+            })
+        })
     }
 }
 </script>

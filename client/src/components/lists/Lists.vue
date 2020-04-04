@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Thumbnail from './Thumbnail'
 
 export default {
@@ -26,6 +26,14 @@ export default {
     },
     components: {
         Thumbnail,
+    },
+    methods: {
+        ...mapActions([
+            'fetchLists'
+        ])
+    },
+    mounted () {
+        this.fetchLists()
     }
 }
 </script>

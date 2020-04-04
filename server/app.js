@@ -1,9 +1,12 @@
 import express from 'express'
+import cors from 'cors'
 import Database from './db/db'
 
 const app = express()
 const port = 3000
 const db = new Database()
+
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.send('Hello world from server!')
