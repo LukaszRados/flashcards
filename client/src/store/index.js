@@ -7,6 +7,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         lists: [],
+        cards: [],
         userName: 'Lukasz',
     },
 
@@ -15,13 +16,13 @@ const store = new Vuex.Store({
             state.lists = lists
         },
         updateCards (state, { listId, cards }) {
-            state.lists.find(list => list.id === listId).cards = cards
+            state.cards[listId] = cards
         }
     },
 
     getters: {
         getCards: state => id => {
-            return state.lists.find(list => list.id === id).cards
+            return state.cards[id] ? state.cards[id] : []
         }
     },
 

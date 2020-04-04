@@ -10,7 +10,7 @@
                 Back
             </router-link>
         </header>
-        <div class='list'>
+        <div class='list' v-if='cards'>
             <div class='list__inner' :style='{ transform: translate }'>
                 <Card
                     v-for='card in cards'
@@ -32,7 +32,8 @@
                 v-if='index !== 0' 
             />
         </div>
-        <Progress :value='progress' />
+        <Progress :value='progress' v-if='cards' />
+        <Loader v-if='!cards || cards.length === 0' />
     </div>
 </template>
 
@@ -41,46 +42,46 @@ import { mapActions } from 'vuex'
 import Card from './../../components/lists/Card'
 import ListButton from './../../components/lists/ListButton'
 import Progress from './../../components/lists/Progress'
+import Loader from './../../components/shared/Loader'
 
 export default {
     data () {
         return {
             cards: [],
             index: 0,
-            activeCard: {},
             translate: '',
+            listId: parseInt(this.$route.params.id, 10),
         }
     },
     components: {
         Card,
         ListButton,
         Progress,
+        Loader,
     },
     computed: {
         progress () {
             return Math.round((this.index) / (this.cards.length - 1) * 100)
-        }
-    },
-    watch: {
+        },
         activeCard () {
-            this.updatePosition()
-        }
+            return this.cards[this.index]
+        },
     },
     methods: {
         ...mapActions([
             'fetchCards',
-            'fetchLists',
         ]),
         next () {
             this.index++
-            this.activeCard = this.cards[this.index]
+            this.updatePosition()
         },
         previous () {
             this.index--
-            this.activeCard = this.cards[this.index]
+            this.updatePosition()
         },
         updatePosition () {
             if (!this.activeCard || !this.$refs[this.activeCard.id]) return ''
+
             const screenWidth = document.body.clientWidth
             const cardWidth = this.$refs[this.activeCard.id][0].$el.clientWidth
 
@@ -88,15 +89,9 @@ export default {
         }
     },
     mounted () {
-        const listId = parseInt(this.$route.params.id, 10)
-        this.fetchLists().then(() => {
-            this.fetchCards(listId).then(() => {
-                this.cards = this.$store.getters.getCards(listId)
-                this.activeCard = this.cards[this.index]
-                this.$nextTick(() => {
-                    this.updatePosition()
-                })
-            })
+        this.fetchCards(this.listId).then(() => {
+            this.cards = this.$store.getters.getCards(this.listId)
+            this.$nextTick(this.updatePosition)
         })
     }
 }

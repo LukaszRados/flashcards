@@ -1,0 +1,48 @@
+@import './../../config/variables.scss';
+
+@keyframes pulse {
+    from {
+        opacity: 1;
+        transform: scale(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.loader {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    justify-content: center;
+    width: 100%;
+}
+.loader__text {
+    color: #fff;
+    font-weight: $font-bold;
+}
+.loader__animation {
+    display: block;
+    height: 80px;
+    margin: 0 auto 15px;
+    position: relative;
+    width: 80px;
+}
+.loader__animation:before,
+.loader__animation:after {
+    animation-duration: 2s;
+    animation-name: pulse;
+    animation-iteration-count: infinite;
+    background: #fff;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+.loader__animation:before {
+    animation-delay: 1s;
+}
