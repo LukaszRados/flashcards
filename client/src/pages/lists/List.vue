@@ -10,7 +10,7 @@
                 Back
             </router-link>
         </header>
-        <div class='list' v-if='cards'>
+        <div class='list' v-if='!isLoading'>
             <div class='list__inner' :style='{ transform: translate }'>
                 <Card
                     v-for='card in cards'
@@ -32,13 +32,12 @@
                 v-if='index !== 0' 
             />
         </div>
-        <Progress :value='progress' v-if='cards' />
-        <Loader v-if='!cards || cards.length === 0' />
+        <Loader v-if='isLoading' />
+        <Progress :value='progress' v-if='!isLoading' />
     </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import Card from './../../components/lists/Card'
 import ListButton from './../../components/lists/ListButton'
 import Progress from './../../components/lists/Progress'
@@ -47,10 +46,10 @@ import Loader from './../../components/shared/Loader'
 export default {
     data () {
         return {
-            cards: [],
             index: 0,
             translate: '',
             listId: parseInt(this.$route.params.id, 10),
+            isLoading: true,
         }
     },
     components: {
@@ -60,6 +59,9 @@ export default {
         Loader,
     },
     computed: {
+        cards () {
+            return this.$store.getters.getCards(this.listId)
+        },
         progress () {
             return Math.round((this.index) / (this.cards.length - 1) * 100)
         },
@@ -68,9 +70,6 @@ export default {
         },
     },
     methods: {
-        ...mapActions([
-            'fetchCards',
-        ]),
         next () {
             this.index++
             this.updatePosition()
@@ -88,9 +87,10 @@ export default {
             this.translate = `translateX(${screenWidth / 2 - cardWidth / 2 - cardWidth * this.index}px)`
         }
     },
-    mounted () {
-        this.fetchCards(this.listId).then(() => {
-            this.cards = this.$store.getters.getCards(this.listId)
+    created () {
+        this.isLoading = true
+        this.$store.dispatch('fetchCards', this.listId).then(() => {
+            this.isLoading = false
             this.$nextTick(this.updatePosition)
         })
     }
