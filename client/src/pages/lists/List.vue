@@ -42,6 +42,7 @@ import Card from './../../components/lists/Card'
 import ListButton from './../../components/lists/ListButton'
 import Progress from './../../components/lists/Progress'
 import Loader from './../../components/shared/Loader'
+import { mapActions } from 'vuex'
 
 export default {
     data () {
@@ -70,6 +71,9 @@ export default {
         },
     },
     methods: {
+        ...mapActions({
+            fetchCards: 'fetchCards',
+        }),
         next () {
             this.index++
             this.updatePosition()
@@ -89,7 +93,7 @@ export default {
     },
     created () {
         this.isLoading = true
-        this.$store.dispatch('fetchCards', this.listId).then(() => {
+        this.fetchCards(this.listId).then(() => {
             this.isLoading = false
             this.$nextTick(this.updatePosition)
         })

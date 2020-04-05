@@ -7,7 +7,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         lists: [],
-        cards: [],
+        cards: {},
         userName: 'Lukasz',
     },
 
