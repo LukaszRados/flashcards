@@ -4,7 +4,7 @@ import axios from 'axios'
 import App from './App.vue'
 
 import { routes } from './routes'
-import { store } from './store'
+import store from './store'
 
 import './scss/app.scss'
 
