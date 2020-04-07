@@ -17,9 +17,12 @@ export default {
         item: Object,
     },
     computed: {
+        count () {
+            return this.item.cards.length
+        },
         counter () {
-            if (this.item.count === 0) return `no cards`
-            return `${this.item.count} ${this.item.count === 1 ? 'card' : 'cards'}` 
+            if (this.count === 0) return `no cards`
+            return `${this.count} ${this.count === 1 ? 'card' : 'cards'}` 
         },
         link () {
             return this.item.type === 'create' ? '#create' : '#'

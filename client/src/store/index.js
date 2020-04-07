@@ -36,7 +36,7 @@ export const actions = {
         return axios.get(`http://localhost:3000/cards/${listId}`).then(response => {
             commit('updateCards', { 
                 listId, 
-                cards: response.data
+                cards: response.data.cards
             })
         })
     }

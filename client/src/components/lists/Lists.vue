@@ -32,7 +32,7 @@ export default {
             'fetchLists'
         ])
     },
-    mounted () {
+    created () {
         this.fetchLists()
     }
 }
