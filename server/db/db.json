@@ -1,125 +1,58 @@
 {
   "lists": [
     {
-      "id": 1,
-      "title": "Verbs",
-      "emoji": "🎷",
+      "id": "89cc5c6c-27e6-4384-8235-8c5ea34d8867",
+      "title": "Test list",
+      "emoji": "&#x1f494",
       "cards": [
         {
-          "id": 1,
+          "id": "cf84ec3a-c371-4b65-8a8f-d36fbd517570",
+          "word": "aceptar",
+          "translation": "to accept"
+        },
+        {
+          "id": "eb364075-22c6-495d-a02b-7ffcc7ed26fa",
           "word": "comer",
           "translation": "to eat"
-        },
-        {
-          "id": 2,
-          "word": "beber",
-          "translation": "to drink"
-        },
-        {
-          "id": 3,
-          "word": "bailar",
-          "translation": "to dance"
-        },
-        {
-          "id": 4,
-          "word": "cantar",
-          "translation": "to sing"
-        },
-        {
-          "id": 5,
-          "word": "tocar",
-          "translation": "to play"
-        },
-        {
-          "id": 6,
-          "word": "hacer",
-          "translation": "to make"
-        },
-        {
-          "id": 7,
-          "word": "estar",
-          "translation": "to be"
         }
       ]
     },
     {
-      "id": 2,
-      "title": "Sailing",
-      "emoji": "⛵️",
+      "id": "61382bcb-1b9e-4a18-8124-37ab8647a741",
+      "title": "On the farm",
+      "emoji": "&#x1f437",
       "cards": [
         {
-          "id": 1,
-          "word": "navegar",
-          "translation": "to sail"
+          "id": "080dca3d-eb3e-44f6-8749-94ed0c25783f",
+          "word": "el cordero",
+          "translation": "the pig"
         },
         {
-          "id": 8,
-          "word": "el barco",
-          "translation": "the ship"
+          "id": "1643bbce-7050-41fe-a780-b73c22f38e76",
+          "word": "la vaca",
+          "translation": "the cow"
         },
         {
-          "id": 9,
-          "word": "el velero",
-          "translation": "the sailboat"
+          "id": "349ca0d4-de92-49e3-a7c5-d0756785bfcf",
+          "word": "la oveja",
+          "translation": "the sheep"
         },
         {
-          "id": 10,
-          "word": "amarrar",
-          "translation": "to moor"
+          "id": "b15f1a4a-e567-4cce-a5c5-d7888dc8826d",
+          "word": "el perro",
+          "translation": "the dog"
         }
       ]
     },
     {
-      "id": 3,
-      "title": "Food and drink",
-      "emoji": "🥑",
+      "id": "550434ff-dd78-4e6a-b3c4-498623767830",
+      "title": "Christmas",
+      "emoji": "&#x1f384",
       "cards": [
         {
-          "id": 11,
-          "word": "el aguacate",
-          "translation": "avocado"
-        },
-        {
-          "id": 12,
-          "word": "el platano",
-          "translation": "banana"
-        },
-        {
-          "id": 13,
-          "word": "el agua",
-          "translation": "water"
-        },
-        {
-          "id": 14,
-          "word": "el zumo de naranja",
-          "translation": "orange juice"
-        },
-        {
-          "id": 15,
-          "word": "la carne de vaca",
-          "translation": "beef"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "title": "Animals",
-      "emoji": "🐳",
-      "cards": [
-        {
-          "id": 16,
-          "word": "el elefante",
-          "translation": "elephant"
-        },
-        {
-          "id": 17,
-          "word": "el leon",
-          "translation": "lion"
-        },
-        {
-          "id": 18,
-          "word": "el pajaro",
-          "translation": "parrot"
+          "id": "6e33f2e3-e22c-4ea5-815c-11336d5394c6",
+          "word": "merry christmas",
+          "translation": "feliz navidad"
         }
       ]
     }

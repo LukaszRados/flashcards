@@ -39,6 +39,12 @@ export const actions = {
                 cards: response.data.cards
             })
         })
+    },
+
+    createList ({ commit }, data) {
+        return axios.post(`http://localhost:3000/lists`, data).then(response => {
+            console.log(response, commit)
+        })
     }
 }
 

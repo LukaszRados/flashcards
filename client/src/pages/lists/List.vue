@@ -1,15 +1,6 @@
 <template>
     <div>
-        <header class='list-header'>
-            <router-link to='/'>
-                <svg xmlns='http://www.w3.org/2000/svg' width='29' height='25' viewBox='0 0 29 25'>
-                    <line x1='2' y1='13' x2='12' y2='2' />
-                    <line x1='2' y1='13' x2='12' y2='22' />
-                    <line x1='4' y1='13' x2='27' y2='12' />
-                </svg>
-                Back
-            </router-link>
-        </header>
+        <Back />
         <div class='list' v-if='!isLoading'>
             <div class='list__inner' :style='{ transform: translate }'>
                 <Card
@@ -42,6 +33,7 @@ import Card from './../../components/lists/Card'
 import ListButton from './../../components/lists/ListButton'
 import Progress from './../../components/lists/Progress'
 import Loader from './../../components/shared/Loader'
+import Back from './../../components/shared/Back'
 import { mapActions } from 'vuex'
 
 export default {
@@ -49,7 +41,7 @@ export default {
         return {
             index: 0,
             translate: '',
-            listId: parseInt(this.$route.params.id, 10),
+            listId: this.$route.params.id,
             isLoading: true,
         }
     },
@@ -58,6 +50,7 @@ export default {
         ListButton,
         Progress,
         Loader,
+        Back,
     },
     computed: {
         cards () {

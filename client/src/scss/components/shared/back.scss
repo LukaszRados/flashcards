@@ -1,0 +1,25 @@
+@import './../../config/variables.scss';
+
+.back {
+    align-items: center;
+    display: flex;
+    height: 10vh;
+    padding: 20px;
+}
+.back a {
+    color: #fff;
+    display: inline-block;
+    font-weight: $font-bold;
+    padding-left: 42px;
+    position: relative;
+    text-decoration: none;
+    vertical-align: middle;
+}
+.back svg {
+    left: 0;
+    position: absolute;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-width: 4px;
+    top: calc(50% - 12px);
+}

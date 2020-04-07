@@ -1,0 +1,105 @@
+@import './../../config/variables.scss';
+
+.form {
+    padding: 20px;
+    max-width: 560px;
+}
+.form__title {
+    margin-bottom: 40px;
+}
+.form__emoji {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 3em;
+    line-height: 1;
+    text-align: center;
+    width: 100px;
+}
+.form input:focus,
+.form button:focus {
+    outline: 0;
+}
+.form__title input {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-family: $font-sans-serif;
+    font-size: 2em;
+    font-weight: $font-bold;
+    width: calc(100% - 100px);
+}
+
+.form__card {
+    background: #fff;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    position: relative;
+}
+.form__card input {
+    background: transparent;
+    border: 0;
+    font-family: $font-serif;
+    font-size: 1.4em;
+    font-style: italic;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+.form__card input:first-child {
+    border-bottom: 1px solid #efefef;
+}
+.form__card button {
+    background: #fff;
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 2px 15px rgba(#000, .3);
+    cursor: pointer;
+    font-size: 1.5em;
+    height: 50px;
+    position: absolute;
+    right: -25px;
+    top: calc(50% - 25px);
+    width: 50px;
+}
+
+.form__create {
+    background: transparent;
+    border: 4px dashed rgba($color-gray, .5);
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fff;
+    font-family: $font-sans-serif;
+    font-size: 1em;
+    font-weight: $font-bold;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: background .3s ease;
+    width: 100%;
+}
+.form__create:hover {
+    background: rgba(#fff, .1);
+}
+
+.form__button {
+    background: $color-action;
+    border: 0;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    font-family: $font-sans-serif;
+    font-size: 1.1em;
+    font-weight: $font-bold;
+    padding: 10px 20px;
+    transition: background .4s ease;
+}
+.form__button:hover {
+    background: darken($color-action, 20%);
+}
+.form__button:disabled {
+    background: $color-gray;
+    cursor: not-allowed;
+}

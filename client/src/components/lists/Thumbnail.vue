@@ -5,9 +5,7 @@
             <span class='item__count' v-else>{{ counter }}</span>
             <span class='item__title'>{{ item.title }}</span>
         </span>
-        <span class='item__emoji'>
-            {{ item.emoji }}
-        </span>
+        <span class='item__emoji' v-html='item.emoji'></span>
     </router-link>
 </template>
 
