@@ -16,8 +16,10 @@ npm run serve
 
 ### Server
 
-TBD
+Server uses `express.js`. Database is `JSON` based and uses `lowdb`.
 
-### Database
-
-TBD
+```
+cd server
+npm install
+npm run serve
+```
