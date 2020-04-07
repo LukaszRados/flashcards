@@ -1,5 +1,8 @@
 @import './../../config/variables.scss';
 
+.list-header {
+    display: flex;
+}
 .list {
     height: 80vh;
     overflow: hidden;

@@ -46,6 +46,18 @@ app.post('/lists', (req, res) => {
     })
 })
 
+app.put('/list/:list_id', (req, res) => {
+    const listId = req.params.list_id
+    db
+        .get('lists')
+        .find({ id: listId })
+        .assign(req.body)
+        .write()
+    res.send({
+        status: 'Success'
+    })
+})
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`)
 })

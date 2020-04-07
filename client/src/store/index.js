@@ -8,6 +8,7 @@ export const state = {
     lists: [],
     cards: {},
     userName: 'Lukasz',
+    notification: '',
 }
 
 export const mutations = {
@@ -16,12 +17,21 @@ export const mutations = {
     },
     updateCards (state, { listId, cards }) {
         state.cards[listId] = cards
+    },
+    setNotification (state, notification) {
+        state.notification = notification
+    },
+    removeNotification () {
+        state.notification = ''
     }
 }
 
 export const getters = {
     getCards: state => id => {
         return state.cards[id] ? state.cards[id] : []
+    },
+    getList: state => id => {
+        return state.lists.find(list => list.id === id)
     }
 }
 
@@ -43,6 +53,12 @@ export const actions = {
 
     createList ({ commit }, data) {
         return axios.post(`http://localhost:3000/lists`, data).then(response => {
+            console.log(response, commit)
+        })
+    },
+
+    updateList ({ commit }, data) {
+        return axios.put(`http://localhost:3000/list/${data.id}`, data).then(response => {
             console.log(response, commit)
         })
     }

@@ -1,6 +1,9 @@
 <template>
     <div>
-        <Back />
+        <div class='list-header'>
+            <Back />
+            <EditButton />
+        </div>
         <div class='list' v-if='!isLoading'>
             <div class='list__inner' :style='{ transform: translate }'>
                 <Card
@@ -32,6 +35,7 @@
 import Card from './../../components/lists/Card'
 import ListButton from './../../components/lists/ListButton'
 import Progress from './../../components/lists/Progress'
+import EditButton from './../../components/lists/EditButton'
 import Loader from './../../components/shared/Loader'
 import Back from './../../components/shared/Back'
 import { mapActions } from 'vuex'
@@ -51,6 +55,7 @@ export default {
         Progress,
         Loader,
         Back,
+        EditButton,
     },
     computed: {
         cards () {

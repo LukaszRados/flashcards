@@ -1,7 +1,15 @@
 <template>
     <div>
         <Back />
-        <form @submit.prevent='submit' class='form' method='POST' :disabled='loading'>
+        <Loader v-if='!initialised' />
+        <form
+            method='POST'
+            class='form'
+            :class='{ "is-loading": loading }'
+            :disabled='loading'
+            @submit.prevent='submit'
+            v-if='initialised'
+        >
             <div class='form__title'>
                 <button type='button' class='form__emoji' v-html='emoji' @click.prevent='emoji = randomEmoji()'></button>
                 <input type='text' v-model='title' placeholder='Title of your deck' />
@@ -21,16 +29,19 @@
 
 <script>
 import Back from './../../components/shared/Back'
+import Loader from './../../components/shared/Loader'
 import randomEmoji from './../../mixins/emoji'
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
     components: {
         Back,
+        Loader,
     },
     mixins: [ randomEmoji ],
     data () {
         return {
+            id: this.$route.params.id,
             emoji: this.randomEmoji(),
             title: '',
             cards: [{
@@ -39,6 +50,7 @@ export default {
                 translation: '',
             }],
             loading: false,
+            initialised: false,
         }
     },
     computed: {
@@ -48,20 +60,38 @@ export default {
     },
     methods: {
         ...mapActions([
-            'createList'
+            'createList',
+            'fetchLists',
+            'updateList',
+        ]),
+        ...mapMutations([
+            'setNotification'
         ]),
         submit () {
             this.loading = true
-            this.createList({
+
+            const data = {
                 title: this.title,
                 emoji: this.emoji,
                 cards: this.cards,
-            }).then(() => {
-                this.title = ''
-                this.emoji = this.randomEmoji()
-                this.cards = []
-                this.loading = false
-            })
+            }
+
+            if (this.id) {
+                this.updateList({
+                    id: this.id,
+                    ...data,
+                }).then(() => {
+                    this.loading = true
+                    this.setNotification('Card deck was updated.')
+                    this.$router.push({ path: '/' })
+                })
+            } else {
+                this.createList(data).then(() => {
+                    this.loading = true
+                    this.setNotification('Card deck was added.')
+                    this.$router.push({ path: '/' })
+                })
+            }
         },
         addCard () {
             this.cards.push({
@@ -72,6 +102,19 @@ export default {
         },
         removeCard (cardToRemove) {
             this.cards = this.cards.filter(card => card !== cardToRemove)
+        }
+    },
+    created () {
+        if (this.id) {
+            this.fetchLists(this.id).then(() => {
+                const list = this.$store.getters.getList(this.id)
+                this.title = list.title
+                this.emoji = list.emoji
+                this.cards = [ ...list.cards ]
+                this.initialised = true
+            })
+        } else {
+            this.initialised = true
         }
     }
 }

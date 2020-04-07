@@ -15,4 +15,9 @@ export const routes = [
         path: '/list/:id', 
         component: List,
     },
+    {
+        path: '/list/:id/edit',
+        component: Create,
+        name: 'edit',
+    }
 ]
