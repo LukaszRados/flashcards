@@ -1,0 +1,25 @@
+@import './../../config/variables.scss';
+
+.button {
+    background: $color-action;
+    border: 0;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    font-family: $font-sans-serif;
+    font-size: 1.1em;
+    font-weight: $font-bold;
+    padding: 10px 20px;
+    transition: background .4s ease;
+}
+.button--big {
+    border-radius: 30px;
+    padding: 15px 30px;
+}
+.button:hover {
+    background: darken($color-action, 20%);
+}
+.button:disabled {
+    background: $color-gray;
+    cursor: not-allowed;
+}

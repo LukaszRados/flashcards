@@ -8,7 +8,6 @@ import store from './store'
 
 import './scss/app.scss'
 
-
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.prototype.$http = axios
@@ -16,6 +15,13 @@ Vue.prototype.$http = axios
 const router = new VueRouter({
     mode: 'history',
     routes
+})
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        next({ name: 'login' })
+    }
+    next()
 })
 
 new Vue({

@@ -4,10 +4,20 @@ import lowdb from 'lowdb'
 import FileSync from 'lowdb/adapters/FileSync'
 import bodyParser from 'body-parser'
 import { v4 as uuidv4 } from 'uuid';
+import dotenv from 'dotenv'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+
+const users = [{
+    username: 'admin',
+    password: bcrypt.hashSync('admin', 8),
+}]
 
 const app = express()
 const port = 3000
 const db = lowdb(new FileSync('db/db.json'))
+
+dotenv.config()
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -17,6 +27,36 @@ db.defaults({ lists: [] }).write()
 
 app.get('/', (req, res) => {
     res.send('Hello world from server!')
+})
+
+app.post('/user/login', (req, res) => {
+    const data = {
+        username: req.body.username,
+        password: req.body.password,
+    }
+    const user = users.find(user => user.username === data.username)
+    if (!user || !bcrypt.compareSync(data.password, user.password)) {
+        res.send({
+            auth: false,
+            error: 'No user found'
+        })
+        return
+    }
+    const token = jwt.sign(user, process.env.TOKEN, {
+        expiresIn: 86400
+    })
+    if (token) {
+        res.send({
+            auth: true,
+            token,
+            username: user.username,
+        })
+    } else {
+        res.send({
+            auth: false,
+            error: 'Unable to generate a token'
+        })
+    }
 })
 
 app.get('/lists', (req, res) => {

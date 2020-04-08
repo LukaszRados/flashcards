@@ -2,7 +2,7 @@
   "lists": [
     {
       "id": "89cc5c6c-27e6-4384-8235-8c5ea34d8867",
-      "title": "Test list",
+      "title": "Common verbs",
       "emoji": "&#x1f419",
       "cards": [
         {
@@ -103,6 +103,18 @@
           "id": 1586278735572,
           "word": "Christmas carols",
           "translation": "Villancicos"
+        }
+      ]
+    },
+    {
+      "id": "574c14c5-c5b1-4ed4-b4de-8ed0f077dfd7",
+      "title": "Test list",
+      "emoji": "&#x1f6a7",
+      "cards": [
+        {
+          "id": "d15a83f5-baa1-494b-950a-157e087e73e6",
+          "word": "hello",
+          "translation": "hola"
         }
       ]
     }

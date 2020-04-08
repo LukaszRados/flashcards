@@ -21,7 +21,7 @@
             </div>
             <div>
                 <button type='button' @click='addCard' class='form__create'>+ next card</button>
-                <button type='submit' :disabled='!formIsReady' class='form__button'>Save</button>
+                <Button :disabled='!formIsReady' text='Save' />
             </div>
         </form>
     </div>
@@ -30,12 +30,14 @@
 <script>
 import Back from './../../components/shared/Back'
 import Loader from './../../components/shared/Loader'
+import Button from './../../components/shared/Button'
 import randomEmoji from './../../mixins/emoji'
 import { mapActions, mapMutations } from 'vuex'
 
 export default {
     components: {
         Back,
+        Button,
         Loader,
     },
     mixins: [ randomEmoji ],
@@ -82,14 +84,20 @@ export default {
                     ...data,
                 }).then(() => {
                     this.loading = true
-                    this.setNotification('Card deck was updated.')
-                    this.$router.push({ path: '/' })
+                    this.setNotification({
+                        type: 'success',
+                        text: 'Card deck was updated.'
+                    })
+                    this.$router.push({ name: 'index' })
                 })
             } else {
                 this.createList(data).then(() => {
                     this.loading = true
-                    this.setNotification('Card deck was added.')
-                    this.$router.push({ path: '/' })
+                    this.setNotification({
+                        type: 'success',
+                        text: 'Card deck was added.'
+                    })
+                    this.$router.push({ name: 'index' })
                 })
             }
         },

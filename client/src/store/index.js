@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export const state = {
     lists: [],
     cards: {},
-    userName: 'Lukasz',
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
     notification: '',
 }
 
@@ -21,8 +21,12 @@ export const mutations = {
     setNotification (state, notification) {
         state.notification = notification
     },
-    removeNotification () {
+    removeNotification (state) {
         state.notification = ''
+    },
+    setUser (state, user) {
+        state.user = user
+        localStorage.setItem('user', JSON.stringify(user))
     }
 }
 

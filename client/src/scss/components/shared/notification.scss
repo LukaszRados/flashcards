@@ -1,5 +1,5 @@
 .notification {
-    background: #16a085;
+    background: #00a8ff;
     border-radius: 40px;
     bottom: 20px;
     color: #fff;
@@ -9,4 +9,10 @@
     position: fixed;
     text-align: center;
     width: calc(100% - 40px);
+}
+.notification--success {
+    background: #16a085;
+}
+.notification--error {
+    background: #e84118;
 }

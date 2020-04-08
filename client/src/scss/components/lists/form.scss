@@ -86,23 +86,3 @@
 .form__create:hover {
     background: rgba(#fff, .1);
 }
-
-.form__button {
-    background: $color-action;
-    border: 0;
-    border-radius: 20px;
-    color: #fff;
-    cursor: pointer;
-    font-family: $font-sans-serif;
-    font-size: 1.1em;
-    font-weight: $font-bold;
-    padding: 10px 20px;
-    transition: background .4s ease;
-}
-.form__button:hover {
-    background: darken($color-action, 20%);
-}
-.form__button:disabled {
-    background: $color-gray;
-    cursor: not-allowed;
-}

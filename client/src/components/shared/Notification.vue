@@ -1,5 +1,10 @@
 <template>
-    <div class='notification' v-if='notification' @click='removeNotification'>{{ notification }}</div>
+    <div
+        class='notification'
+        :class='className'
+        v-if='notification'
+        @click='removeNotification'
+    >{{ notification.text }}</div>
 </template>
 
 <script>
@@ -10,6 +15,9 @@ export default {
         ...mapState([
             'notification'
         ]),
+        className () {
+            return `notification--${this.notification.type}`
+        }
     },
     methods: {
         ...mapMutations([
