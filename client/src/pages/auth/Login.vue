@@ -1,12 +1,12 @@
 <template>
     <div class='login'>
-        <form @submit.prevent='submit' class='login__form' :disable='loading'>
+        <form @submit.prevent='submit' class='login__form' :class='{ "loading": loading }'>
             <h1>Express Flashcards</h1>
             <div class='login__inputs'>
                 <input type='text' v-model='username' placeholder='Your e-mail address' required>
                 <input type='password' v-model='password' placeholder='Your password' required>
             </div>
-            <Button text='Start learning!' variant='big' :disabled='!canSubmit' />
+            <Button text='Start learning!' variant='big' :disabled='!canSubmit || loading' />
         </form>
     </div>
 </template>
