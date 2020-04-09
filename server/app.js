@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import dotenv from 'dotenv'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import authMiddleware from './middleware/auth'
 
 const users = [{
     username: 'admin',
@@ -24,10 +25,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 db.defaults({ lists: [] }).write()
-
-app.get('/', (req, res) => {
-    res.send('Hello world from server!')
-})
 
 app.post('/user/login', (req, res) => {
     const data = {
@@ -59,16 +56,16 @@ app.post('/user/login', (req, res) => {
     }
 })
 
-app.get('/lists', (req, res) => {
+app.get('/lists', authMiddleware, (req, res) => {
     res.send(db.get('lists'))
 })
 
-app.get('/cards/:list_id', (req, res) => {
+app.get('/cards/:list_id', authMiddleware, (req, res) => {
     const listId = req.params.list_id
     res.send(db.get('lists').find(list => list.id === listId))
 })
 
-app.post('/lists', (req, res) => {
+app.post('/lists', authMiddleware, (req, res) => {
     db.get('lists').push({
         id: uuidv4(),
         title: req.body.title,
@@ -86,7 +83,7 @@ app.post('/lists', (req, res) => {
     })
 })
 
-app.put('/list/:list_id', (req, res) => {
+app.put('/list/:list_id', authMiddleware, (req, res) => {
     const listId = req.params.list_id
     db
         .get('lists')
