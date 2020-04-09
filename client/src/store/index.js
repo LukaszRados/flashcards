@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export const state = {
     lists: [],
     cards: {},
-    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+    user: localStorage.getItem('user') ? localStorage.getItem('user') : '',
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
     notification: '',
 }
 
@@ -25,9 +26,15 @@ export const mutations = {
         state.notification = ''
     },
     setUser (state, user) {
-        state.user = user
-        localStorage.setItem('user', JSON.stringify(user))
-    }
+        state.user = user.username
+        state.token = user.token
+        localStorage.setItem('user', user.username)
+        localStorage.setItem('token', user.token)
+    },
+    logout (state) {
+        state.user = ''
+        state.token = ''
+    },
 }
 
 export const getters = {
@@ -64,6 +71,50 @@ export const actions = {
     updateList ({ commit }, data) {
         return axios.put(`http://localhost:3000/list/${data.id}`, data).then(response => {
             console.log(response, commit)
+        })
+    },
+
+    login ({ commit }, data) {
+        return new Promise((resolve, reject) => {
+            axios
+                .post('http://localhost:3000/user/login', data)
+                .then(response => response.data)
+                .then(response => {
+                    if (response.auth) {
+                        commit('setUser', {
+                            username: response.username,
+                            token: response.token,
+                        })
+                        commit('setNotification', {
+                            type: 'success',
+                            text: 'Welcome. Let\'s learn something awesome!'
+                        })
+                        axios.defaults.headers.common['x-access-token'] = response.token
+                        resolve(response)
+                    } else {
+                        commit('setNotification', {
+                            type: 'error',
+                            text: response.error ? response.error : 'Unable to authenticate.'
+                        })
+                        reject(response)
+                    }
+                }).catch((response) => {
+                    commit('setNotification', {
+                        type: 'error',
+                        text: 'Unable to authenticate.'
+                    })
+                    reject(response)
+                })
+        })
+    },
+
+    logout ({ commit }) {
+        return new Promise((resolve) => {
+            commit('logout')
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            delete axios.defaults.headers.common['x-access-token']
+            resolve()
         })
     }
 }

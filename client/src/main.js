@@ -10,7 +10,9 @@ import './scss/app.scss'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+axios.defaults.headers.common['x-access-token'] = localStorage.getItem('token') ? localStorage.getItem('token') : ''
 Vue.prototype.$http = axios
+
 
 const router = new VueRouter({
     mode: 'history',
@@ -19,7 +21,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        next({ name: 'login' })
+        if (localStorage.getItem('user') !== null) {
+            next()
+        } else {
+            next({ name: 'login' })
+        }
     }
     next()
 })
