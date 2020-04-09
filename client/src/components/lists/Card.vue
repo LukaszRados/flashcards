@@ -38,6 +38,11 @@ export default {
             activeSide: 'front',
         }
     },
+    watch: {
+        active (value) {
+            if (!value) this.activeSide = 'front'
+        }
+    },
     components: {
         CardFeedback
     },
