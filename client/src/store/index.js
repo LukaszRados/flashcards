@@ -39,8 +39,8 @@ export const mutations = {
 }
 
 export const getters = {
-    getCards: state => id => {
-        return state.cards[id] ? state.cards[id] : []
+    getCardsInRandomOrder: state => id => {
+        return state.cards[id] ? state.cards[id].sort(() => Math.random() - 0.5) : []
     },
     getList: state => id => {
         return state.lists.find(list => list.id === id)

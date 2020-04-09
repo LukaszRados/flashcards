@@ -59,7 +59,7 @@ export default {
     },
     computed: {
         cards () {
-            return this.$store.getters.getCards(this.listId)
+            return this.$store.getters.getCardsInRandomOrder(this.listId)
         },
         progress () {
             return Math.round((this.index) / (this.cards.length - 1) * 100)
