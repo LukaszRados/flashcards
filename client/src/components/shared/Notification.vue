@@ -1,10 +1,12 @@
 <template>
-    <div
-        class='notification'
-        :class='className'
-        v-if='notification'
-        @click='removeNotification'
-    >{{ notification.text }}</div>
+    <transition name='notification'>
+        <div
+            class='notification'
+            :class='className'
+            v-if='notification'
+            @click='clearNotification'
+        >{{ notification.text }}</div>
+    </transition>
 </template>
 
 <script>
@@ -21,7 +23,7 @@ export default {
     },
     methods: {
         ...mapMutations([
-            'removeNotification'
+            'clearNotification'
         ])
     }
 }

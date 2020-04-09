@@ -9,16 +9,16 @@
     margin: 0;
 }
 .header p {
-    color: $color-gray;
-    font-size: 1.3em;
+    color: rgba($color-gray, .7);
+    font-size: 1em;
     font-weight: $font-bold;
     margin: 0 0 10px;
 }
-.header input {
-    background: transparent;
-    border: 0;
-    color: inherit;
-    font-family: inherit;
-    font-weight: inherit;
-    font-size: inherit;
+.header a {
+    color: #fff;
+    float: right;
+    text-decoration: none;
+}
+.header a:hover {
+    color: rgba(#fff, .5);
 }

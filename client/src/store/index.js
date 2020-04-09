@@ -9,7 +9,7 @@ export const state = {
     cards: {},
     user: localStorage.getItem('user') ? localStorage.getItem('user') : '',
     token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
-    notification: '',
+    notification: null,
 }
 
 export const mutations = {
@@ -22,8 +22,9 @@ export const mutations = {
     setNotification (state, notification) {
         state.notification = notification
     },
-    removeNotification (state) {
-        state.notification = ''
+    clearNotification (state) {
+        if (state.notification) clearTimeout(state.notification.timeout)
+        state.notification = null
     },
     setUser (state, user) {
         state.user = user.username
@@ -74,7 +75,7 @@ export const actions = {
         })
     },
 
-    login ({ commit }, data) {
+    login ({ commit, dispatch }, data) {
         return new Promise((resolve, reject) => {
             axios
                 .post('http://localhost:3000/user/login', data)
@@ -85,21 +86,21 @@ export const actions = {
                             username: response.username,
                             token: response.token,
                         })
-                        commit('setNotification', {
+                        dispatch('pushNotification', {
                             type: 'success',
                             text: 'Welcome. Let\'s learn something awesome!'
                         })
                         axios.defaults.headers.common['x-access-token'] = response.token
                         resolve(response)
                     } else {
-                        commit('setNotification', {
+                        dispatch('pushNotification', {
                             type: 'error',
                             text: response.error ? response.error : 'Unable to authenticate.'
                         })
                         reject(response)
                     }
                 }).catch((response) => {
-                    commit('setNotification', {
+                    dispatch('pushNotification', {
                         type: 'error',
                         text: 'Unable to authenticate.'
                     })
@@ -116,6 +117,14 @@ export const actions = {
             delete axios.defaults.headers.common['x-access-token']
             resolve()
         })
+    },
+
+    pushNotification ({ commit }, notification) {
+        commit('clearNotification')
+        notification.timeout = setTimeout(() => {
+            commit('clearNotification')
+        }, 3000)
+        commit('setNotification', notification)
     }
 }
 

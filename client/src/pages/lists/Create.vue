@@ -32,7 +32,7 @@ import Back from './../../components/shared/Back'
 import Loader from './../../components/shared/Loader'
 import Button from './../../components/shared/Button'
 import randomEmoji from './../../mixins/emoji'
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
     components: {
@@ -65,9 +65,7 @@ export default {
             'createList',
             'fetchLists',
             'updateList',
-        ]),
-        ...mapMutations([
-            'setNotification'
+            'pushNotification',
         ]),
         submit () {
             this.loading = true
@@ -84,7 +82,7 @@ export default {
                     ...data,
                 }).then(() => {
                     this.loading = true
-                    this.setNotification({
+                    this.pushNotification({
                         type: 'success',
                         text: 'Card deck was updated.'
                     })
@@ -93,7 +91,7 @@ export default {
             } else {
                 this.createList(data).then(() => {
                     this.loading = true
-                    this.setNotification({
+                    this.pushNotification({
                         type: 'success',
                         text: 'Card deck was added.'
                     })

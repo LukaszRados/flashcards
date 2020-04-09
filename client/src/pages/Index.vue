@@ -1,7 +1,12 @@
 <template>
     <div>
         <Header>
-            <p>Hello, {{ user }}</p>
+            <p>
+                Hello, {{ user }}. 
+                <router-link :to='{ name: "logout" }'>
+                    Logout
+                </router-link>
+            </p>
             <h1>My lists</h1>
         </Header>
         <Lists />

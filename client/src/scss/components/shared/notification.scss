@@ -16,3 +16,12 @@
 .notification--error {
     background: #e84118;
 }
+
+.notification-enter-active,
+.notification-leave-active {
+    transition: transform .2s ease;
+}
+.notification-enter,
+.notification-leave-to {
+    transform: translateY(100px);
+}

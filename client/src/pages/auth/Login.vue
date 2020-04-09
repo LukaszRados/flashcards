@@ -13,7 +13,7 @@
 
 <script>
 import Button from './../../components/shared/Button'
-import { mapMutations, mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     data () {
@@ -24,12 +24,9 @@ export default {
         }
     },
     methods: {
-        ...mapMutations([
-            'setUser',
-            'setNotification'
-        ]),
         ...mapActions([
-            'login'
+            'login',
+            'pushNotification',
         ]),
         submit () {
             this.loading = true
@@ -38,7 +35,7 @@ export default {
                 password: this.password,
             }
             this.login(formData).then(() => {
-                this.$router.push({ path: '/' })
+                this.$router.push({ name: 'index' })
                 this.loading = false
             }).catch(() => {
                 this.loading = false
@@ -49,8 +46,20 @@ export default {
         Button,
     },
     computed: {
+        ...mapState([
+            'token'
+        ]),
         canSubmit () {
             return this.username.length > 0 && this.password.length > 0
+        }
+    },
+    created () {
+        if (this.token) {
+            this.pushNotification({
+                text: 'Already signed in.',
+                type: 'success'
+            })
+            this.$router.push({ name: 'index' })
         }
     }
 }
