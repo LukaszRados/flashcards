@@ -14,11 +14,6 @@
           "id": "eb364075-22c6-495d-a02b-7ffcc7ed26fa",
           "word": "to eat",
           "translation": "comer"
-        },
-        {
-          "id": 1586278533919,
-          "word": "to swim",
-          "translation": "nadar"
         }
       ]
     },
@@ -30,57 +25,30 @@
         {
           "id": "080dca3d-eb3e-44f6-8749-94ed0c25783f",
           "word": "lamb",
-          "translation": "el cordero"
+          "translation": "el cordero",
+          "correct": 1,
+          "total": 7
         },
         {
           "id": "1643bbce-7050-41fe-a780-b73c22f38e76",
           "word": "cow",
-          "translation": "la vaca"
+          "translation": "la vaca",
+          "correct": 2,
+          "total": 8
         },
         {
           "id": "349ca0d4-de92-49e3-a7c5-d0756785bfcf",
           "word": "sheep",
-          "translation": "la oveja"
+          "translation": "la oveja",
+          "correct": 6,
+          "total": 6
         },
         {
           "id": "b15f1a4a-e567-4cce-a5c5-d7888dc8826d",
           "word": "dog",
-          "translation": "perro"
-        },
-        {
-          "id": 1586278928783,
-          "word": "chicken",
-          "translation": "gallina"
-        },
-        {
-          "id": 1586278968511,
-          "word": "pig",
-          "translation": "cerdo"
-        },
-        {
-          "id": 1586278983800,
-          "word": "duck",
-          "translation": "el pato"
-        },
-        {
-          "id": 1586278993297,
-          "word": "goose",
-          "translation": "el ganso"
-        },
-        {
-          "id": 1586279005527,
-          "word": "horse",
-          "translation": "el caballo"
-        },
-        {
-          "id": 1586279016297,
-          "word": "turkey",
-          "translation": "el pavo"
-        },
-        {
-          "id": 1586279037887,
-          "word": "donkey",
-          "translation": "el burro"
+          "translation": "perro",
+          "correct": 2,
+          "total": 4
         }
       ]
     },
@@ -93,16 +61,6 @@
           "id": "6e33f2e3-e22c-4ea5-815c-11336d5394c6",
           "word": "Merry Christmas",
           "translation": "Feliz Navidad"
-        },
-        {
-          "id": 1586278681534,
-          "word": "cake",
-          "translation": "el pastel"
-        },
-        {
-          "id": 1586278735572,
-          "word": "Christmas carols",
-          "translation": "Villancicos"
         }
       ]
     },
@@ -114,7 +72,9 @@
         {
           "id": "d15a83f5-baa1-494b-950a-157e087e73e6",
           "word": "hello",
-          "translation": "hola"
+          "translation": "hola",
+          "correct": 1,
+          "total": 1
         }
       ]
     }

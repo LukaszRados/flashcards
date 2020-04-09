@@ -12,6 +12,9 @@
     width: 50px;
     z-index: 3;
 }
+.list-button:hover {
+    transform: scale(1.15);
+}
 .list-button--next {
     right: 25px;
 }

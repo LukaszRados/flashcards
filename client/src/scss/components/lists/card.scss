@@ -66,6 +66,26 @@
     font-size: 1em;
     font-style: italic;
 }
+.card__feedback {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 -40px;
+}
+.card__feedback li {
+    display: inline-block;
+    margin: 0 10px;
+}
+.card__button {
+    background: #fff;
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(#000, .15);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5em;
+    height: 60px;
+    width: 60px;
+}
 
 .flip-card-enter-active {
     transition: transform .3s linear;

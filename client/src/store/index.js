@@ -4,6 +4,14 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+const orderCardsBySuccessRate = (card1, card2) => {
+    return card1.success_rate - card2.success_rate
+}
+
+const randomizeCards = () => {
+    return Math.random() - 0.5
+}
+
 export const state = {
     lists: [],
     cards: {},
@@ -18,6 +26,9 @@ export const mutations = {
     },
     updateCards (state, { listId, cards }) {
         state.cards[listId] = cards
+    },
+    updateSuccessRate () {
+        console.log('success')
     },
     setNotification (state, notification) {
         state.notification = notification
@@ -40,7 +51,7 @@ export const mutations = {
 
 export const getters = {
     getCardsInRandomOrder: state => id => {
-        return state.cards[id] ? state.cards[id].sort(() => Math.random() - 0.5) : []
+        return state.cards[id] ? state.cards[id].sort(orderCardsBySuccessRate).slice(0, 15).sort(randomizeCards) : []
     },
     getList: state => id => {
         return state.lists.find(list => list.id === id)
@@ -58,7 +69,10 @@ export const actions = {
         return axios.get(`http://localhost:3000/cards/${listId}`).then(response => {
             commit('updateCards', { 
                 listId, 
-                cards: response.data.cards
+                cards: response.data.cards.map(card => {
+                    card.success_rate = card.total > 0 ? card.correct / card.total : 0
+                    return card
+                })
             })
         })
     },
@@ -72,6 +86,12 @@ export const actions = {
     updateList ({ commit }, data) {
         return axios.put(`http://localhost:3000/list/${data.id}`, data).then(response => {
             console.log(response, commit)
+        })
+    },
+
+    feedback ({ commit }, data) {
+        return axios.post(`http://localhost:3000/feedback/`, data).then(() => {
+            commit('updateSuccessRate', data)
         })
     },
 

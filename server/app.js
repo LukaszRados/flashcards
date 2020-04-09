@@ -73,7 +73,9 @@ app.post('/lists', authMiddleware, (req, res) => {
         cards: req.body.cards.map(card => {
             return {
                 ...card,
-                id: uuidv4()
+                id: uuidv4(),
+                correct: 0,
+                total: 0,
             }
         })
     }).write()
@@ -93,6 +95,31 @@ app.put('/list/:list_id', authMiddleware, (req, res) => {
     res.send({
         status: 'Success'
     })
+})
+
+app.post('/feedback', authMiddleware, (req, res) => {
+    const cardId = req.body.card_id
+    const listId = req.body.list_id
+    const value = parseInt(req.body.value)
+    const card = db
+        .get('lists')
+        .find({ id: listId })
+        .get('cards')
+        .find({ id: cardId })
+    
+    const cardData = card.value()
+    
+    let newValue = cardData.correct ? cardData.correct + value : value
+    if (newValue < 0) newValue = 0
+
+    card
+        .assign({
+            correct: newValue,
+            total: cardData.total ? cardData.total + 1 : 1,
+        })
+        .write()
+
+    res.sendStatus(200)
 })
 
 app.listen(port, () => {

@@ -9,8 +9,8 @@
                 <Card
                     v-for='card in cards'
                     :key='card.id'
-                    :front='card.word'
-                    :back='card.translation'
+                    :list_id='listId'
+                    :card='card'
                     :active='activeCard === card'
                     :ref='card.id'
                 />
