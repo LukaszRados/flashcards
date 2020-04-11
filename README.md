@@ -1,6 +1,8 @@
 # Express Flashcards
 
-A simple flashcards application written in Vue.JS on frontend and Express.js on backend. The main aim of the app is for me to learn new cool stuff (Express) and refresh stuff I already know (Vue). It is also a way to spend quarantine learning something new by actually procrastinating (why would I learn Spanish as I planned if I can write an app to learn Spanish instead) 💁🏻‍♂️ 
+This is a simple flashcards application that I wrote while being in quarantine in Spain. I had plenty of free time and I decided to spend it on learning something new. I decided to polish my Spanish. But what's better from learning a language? Writing an app to learn it.
+
+Was this project complex enough to require Vuex, express or even Vue.js? I don't think so, but it was a nice opportunity to learn something new (Jest, Express.js) and refresh known things (Vue, Vuex). 
 
 ## Installation
 
